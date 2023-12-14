@@ -1,17 +1,12 @@
-import sys
-from pathlib import Path
-sys.path.append(".")
-sys.path.append("..")
-
-import uuid
-from base_entity import BaseEntity, Gender
+from schemas import BaseEntity, Gender
 from database import Base
-from sqlalchemy import Column, String, Uuid, Enum
+from sqlalchemy import Column, String, Enum
+from sqlalchemy.orm import relationship
 
-
-class Author(Base, BaseEntity()):
+class Author(Base, BaseEntity):
    __tablename__ = "authors"
    
-   id = Column(Uuid, primary_key = True, default = uuid.uuid4)
    full_name = Column(String(16))
    gender = Column(Enum(Gender), nullable = False, default = Gender.NONE)
+   
+   books = relationship("Book", back_populates="author")

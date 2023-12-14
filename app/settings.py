@@ -15,3 +15,6 @@ def get_connection_string():
 
 SQLALCHEMY_DATABASE_URL = get_connection_string()
 ADMIN_DEFAULT_PASSWORD = os.environ.get("DEFAULT_PASSWORD")
+
+JWT_SECRET = os.environ.get("JWT_SECRET")
+JWT_ALGORITHM = os.environ.get("JWT_ALGORITHM")

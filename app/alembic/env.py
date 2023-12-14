@@ -1,7 +1,3 @@
-import sys
-from pathlib import Path
-sys.path.append("..")
-
 from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
@@ -20,8 +16,8 @@ config = context.config
 # This line sets up loggers basically.
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
-    
-config.set_main_option('sqlalchemy.url', SQLALCHEMY_DATABASE_URL)
+
+config.set_main_option("sqlalchemy.url", SQLALCHEMY_DATABASE_URL)
 
 # add your model's MetaData object here
 # for 'autogenerate' support
@@ -47,7 +43,7 @@ def run_migrations_offline() -> None:
     script output.
 
     """
-    url = config.set_main_option('sqlalchemy.url', SQLALCHEMY_DATABASE_URL)
+    url = config.set_main_option("sqlalchemy.url", SQLALCHEMY_DATABASE_URL)
 
     context.configure(
         url=url,
@@ -74,9 +70,7 @@ def run_migrations_online() -> None:
     )
 
     with connectable.connect() as connection:
-        context.configure(
-            connection=connection, target_metadata=target_metadata
-        )
+        context.configure(connection=connection, target_metadata=target_metadata)
 
         with context.begin_transaction():
             context.run_migrations()
@@ -86,5 +80,3 @@ if context.is_offline_mode():
     run_migrations_offline()
 else:
     run_migrations_online()
-
-
